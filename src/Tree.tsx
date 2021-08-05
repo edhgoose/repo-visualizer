@@ -63,6 +63,8 @@ const fileColors = {
   rb: "#eb4d4b",
   sh: "#badc58",
   m: "#FFD428",
+  php: "#4F5D95",
+  twig: "#c1d026",
   py: "#5758BB",
   mp4: "#788BA3",
   webm: "#4B6584",
