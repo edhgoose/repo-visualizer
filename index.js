@@ -15087,9 +15087,11 @@ var main = async () => {
     `${username}@users.noreply.github.com`
   ]);
   core.endGroup();
+  core.startGroup("Data generation");
   const excludedPathsString = core.getInput("excluded_paths") || "node_modules,bower_components,dist,out,build,eject,.next,.netlify,.yarn,.git,.vscode,package-lock.json,yarn.lock";
   const excludedPaths = excludedPathsString.split(",").map((str) => str.trim());
   const data = await processDir(`./`, excludedPaths);
+  core.endGroup("Data generation");
   const componentCodeString = import_server.default.renderToStaticMarkup(/* @__PURE__ */ import_react3.default.createElement(Tree, {
     data
   }));

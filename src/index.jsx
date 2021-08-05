@@ -21,10 +21,11 @@ const main = async () => {
 
   core.endGroup()
 
-
+  core.startGroup("Data generation")
   const excludedPathsString = core.getInput("excluded_paths") || "node_modules,bower_components,dist,out,build,eject,.next,.netlify,.yarn,.git,.vscode,package-lock.json,yarn.lock"
   const excludedPaths = excludedPathsString.split(",").map(str => str.trim())
   const data = await processDir(`./`, excludedPaths);
+  core.endGroup("Data generation")
 
   const componentCodeString = ReactDOMServer.renderToStaticMarkup(
     <Tree data={data} />
