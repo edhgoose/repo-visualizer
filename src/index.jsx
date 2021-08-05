@@ -35,6 +35,7 @@ const main = async () => {
 
   await fs.writeFileSync(outputFile, componentCodeString)
 
+  core.startGroup('Git')
   await exec('git', ['add', outputFile])
   const diff = await execWithOutput('git', ['status', '--porcelain', outputFile])
   core.info(`diff: ${diff}`)
@@ -45,6 +46,9 @@ const main = async () => {
 
   exec('git', ['commit', '-m', "Repo visualizer: updated diagram"])
   await exec('git', ['push'])
+  core.endGroup('Git')
+
+  await exec("cat", [outputFile])
 
   console.log("All set!")
 }

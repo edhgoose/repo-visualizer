@@ -15099,6 +15099,7 @@ var main = async () => {
   }));
   const outputFile = core.getInput("output_file") || "./diagram.svg";
   await import_fs2.default.writeFileSync(outputFile, componentCodeString);
+  core.startGroup("Git");
   await (0, import_exec.exec)("git", ["add", outputFile]);
   const diff = await execWithOutput("git", ["status", "--porcelain", outputFile]);
   core.info(`diff: ${diff}`);
@@ -15108,6 +15109,8 @@ var main = async () => {
   }
   (0, import_exec.exec)("git", ["commit", "-m", "Repo visualizer: updated diagram"]);
   await (0, import_exec.exec)("git", ["push"]);
+  core.endGroup("Git");
+  await (0, import_exec.exec)("cat", [outputFile]);
   console.log("All set!");
 };
 main();
